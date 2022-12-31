@@ -6,7 +6,7 @@ const Menu = () => {
     const [categories, setCategories] = useState();
 
     const getCategories = async () => {
-        const result = await axios.get('http://localhost:3000/dishes')
+        const result = await axios.get('http://localhost:3000/api/dishes')
         if (result.status === 200) setCategories(result.data.categories)
     }
 
