@@ -12,7 +12,7 @@ const Item = () => {
     const dispatch = useDispatch();
 
     const getDish = async (id) => {
-        const response = await axios.get(`http://localhost:3000/api/dish/${id}`);
+        const response = await axios.get(`http://3.84.89.81/api/dish/${id}`);
         if (response.status === 200) setDish(response.data.dish);
     }
 
