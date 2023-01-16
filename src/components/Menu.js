@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Category from "./Category";
 import axios from "axios";
+import { baseApiUrl } from "../lib/constants";
 
 const Menu = () => {
     const [categories, setCategories] = useState();
 
     const getCategories = async () => {
-        const result = await axios.get('http://3.84.89.81/api/dishes')
+        const result = await axios.get(`${baseApiUrl}/dishes`)
         if (result.status === 200) setCategories(result.data.categories)
     }
 

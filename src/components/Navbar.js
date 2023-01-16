@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate, useLocation} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { setItem } from "../navbar/NavbarSlice";
+import { baseApiUrl } from "../lib/constants";
 
 const Navbar = () => {
     const [categories, setCategories] = useState();
@@ -14,7 +15,7 @@ const Navbar = () => {
     const location = useLocation();
 
     const getCategories = async () => {
-        const result = await axios.get('http://3.84.89.81/api/dishes');
+        const result = await axios.get(`${baseApiUrl}/dishes`);
         if (result.status === 200) setCategories(result.data.categories);
     }
     

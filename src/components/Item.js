@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from '../cart/CartSlice';
+import { baseApiUrl } from "../lib/constants";
 
 const Item = () => {
     const router = useParams();
@@ -12,7 +13,7 @@ const Item = () => {
     const dispatch = useDispatch();
 
     const getDish = async (id) => {
-        const response = await axios.get(`http://3.84.89.81/api/dish/${id}`);
+        const response = await axios.get(`${baseApiUrl}/dish/${id}`);
         if (response.status === 200) setDish(response.data.dish);
     }
 
