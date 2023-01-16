@@ -21,8 +21,8 @@ const Cart = () => {
         })
         if (notes !== '') orderText += encodeURI(`Observações: ${notes}\n\n`);
         orderText += encodeURI(`Entrega: *Grátis*\n\n`);
-        orderText += encodeURI(`Total: *R$ ${total.replace('.', ',')}*`);
-        window.open(`https://wa.me/+5491123892815/?text=${orderText}`);
+        orderText += encodeURI(`Total do pedido: *R$ ${total.replace('.', ',')}*`);
+        window.open(`https://wa.me/+5522996102119/?text=${orderText}`);
     }
 
     useEffect(() => {
