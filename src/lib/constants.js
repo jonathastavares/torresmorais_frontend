@@ -1,1 +1,1 @@
-export const baseApiUrl = 'http://54.89.17.77/api'
+export const baseApiUrl = 'http://torresmorais.com.br/api'
