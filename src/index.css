@@ -43,3 +43,25 @@ code {
 .slideOut {
   animation: slide-out 0.2s linear;
 }
+
+.notification-container {
+  margin-top: 15%;
+  width: 100%;
+}
+
+.notification-success {
+  width: 100%;
+  opacity: 1;
+}
+
+.notification-error {
+  width: 100%;
+  opacity: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .notification-container {
+    margin-top: 5%;
+    width: 40%;
+  }
+}

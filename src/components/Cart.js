@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from "./Loader";
 import { Dialog, Transition } from '@headlessui/react';
 import { setName, setAddress } from '../personalInfo/PersonalSlice';
+import {NotificationManager} from 'react-notifications';
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart.items);
@@ -11,6 +12,7 @@ const Cart = () => {
     const [total, setTotal] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const [notes, setNotes] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState();
 
     const dispatch = useDispatch();
 
@@ -21,7 +23,8 @@ const Cart = () => {
         })
         if (notes !== '') orderText += encodeURI(`Observações: ${notes}\n\n`);
         orderText += encodeURI(`Entrega: *Grátis*\n\n`);
-        orderText += encodeURI(`Total do pedido: *R$ ${total.replace('.', ',')}*`);
+        orderText += encodeURI(`Total do pedido: *R$ ${total.replace('.', ',')}*\n\n`);
+        orderText += encodeURI(`Forma de pagamento: ${paymentMethod}`);
         window.open(`https://wa.me/+5522996102119/?text=${orderText}`);
     }
 
@@ -34,11 +37,14 @@ const Cart = () => {
     }, [cart]);
 
     const makeOnlyOneSelected = (id) => {
+        setPaymentMethod(id);
         const buttons = document.getElementsByClassName('pagamento');
         Array.from(buttons).forEach((button) => {
             if (button.id !== id) button.checked = false;
         })
     }
+
+    useEffect(() => { console.log(paymentMethod) }, [paymentMethod])
 
     return (
         <div className='flex flex-col justify-between gap-12 w-full items-center mt-6 px-4'>
@@ -92,7 +98,13 @@ const Cart = () => {
                     </div>
                 </div>
             )}
-            <button className='absolute bottom-0 left-0 w-screen flex flex-col items-center justify-center bg-black h-[10%] z-30' onClick={() => setIsOpen(true)}>
+            <button className='absolute bottom-0 left-0 w-screen flex flex-col items-center justify-center bg-black h-[10%] z-30' onClick={() => {
+                if (paymentMethod === undefined || paymentMethod === null) {
+                    NotificationManager.warning('Você precisa selecionar a forma de pagamento', null, 2000);
+                    return;
+                }
+                setIsOpen(true);
+            }}>
                 <h2 className='font-bold text-xl text-white'>TOTAL: R$ {total}</h2>
                 <h1 className='font-bold text-2xl text-white'>CONFIRMAR PEDIDO</h1>
             </button>

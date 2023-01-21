@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import {NotificationManager} from 'react-notifications';
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -12,8 +13,10 @@ export const cartSlice = createSlice({
         const index = state?.items?.indexOf(foundItem);
         const newItems = [...state.items];
         newItems.splice(index, 1, action.payload);
+        NotificationManager.success('Item adicionado ao carrinho!', null, 2000);
         return { items: newItems };
       } else {
+        NotificationManager.success('Item adicionado ao carrinho!', null, 2000);
         return { items: [...state.items, action.payload] };
       }
     },
@@ -23,11 +26,13 @@ export const cartSlice = createSlice({
           const index = state?.items?.indexOf(foundItem);
           const newItems = [...state.items];
           newItems.splice(index, 1, action.payload);
+          NotificationManager.error('Item removido do carrinho!', null, 2000);
           return { items: newItems };
         } else {
           const index = state?.items?.indexOf(foundItem);
           const newItems = [...state.items];
           newItems.splice(index, 1);
+          NotificationManager.error('Item removido do carrinho!', null, 2000);
           return { items: newItems };
         }
     },
